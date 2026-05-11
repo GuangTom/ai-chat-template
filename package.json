@@ -1,0 +1,49 @@
+{
+  "name": "ai-chat-template",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "serve": "NODE_OPTIONS=--max-old-space-size=4096 vite",
+    "build": "NODE_OPTIONS=--max-old-space-size=8192 vite build",
+    "build:dev": "vite build --mode development",
+    "lint:eslint": "eslint --cache --max-warnings 0 \"{src,build}/**/*.{js,ts,tsx}\" --fix",
+    "lint:prettier": "prettier --write  \"src/**/*.{js,ts,json,tsx,css,less,scss,html,md}\"",
+    "lint": "pnpm lint:eslint && pnpm lint:prettier",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-router": "^7.15.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@commitlint/types": "^19.8.0",
+    "@eslint/js": "^10.0.1",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "^24.12.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "code-inspector-plugin": "1.3.3",
+    "commitlint": "^19.5.0",
+    "eslint": "^10.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.5.0",
+    "prettier": "^3.8.3",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.2",
+    "vite": "^8.0.10"
+  }
+}

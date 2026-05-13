@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { useChatStore } from './store/useChatStore'
+import TypeWriter from '@/components/TypeWriter'
+import { useChatStore } from '@/store/useChatStore'
+
+const content =
+  '你好，我是你的 AI 助手。我可以帮你写代码、解答问题、做规划、生成内容。未来 AI 前端会越来越重要，掌握 React + 流式渲染是进入高薪岗位的关键！'
 
 export default function App() {
   const { sessionList, addSession, deleteSession, editSessionTitle } =
@@ -107,10 +111,17 @@ export default function App() {
       </aside>
 
       {/* 主内容区 */}
-      <main className="main-content flex-1 bg-[#f9fafb] p-8">
+      <main className="main-content w-full max-w-200 p-8">
         <h2>欢迎进入 AI 对话页面</h2>
 
-        <p className="mt-2 text-[#666]">当前会话数量：{sessionList.length}</p>
+        <p className="mt-2 text-[#666]">流式输出文字示例</p>
+
+        <div className="type-writer mt-5 p-4 bg-white rounded-xl shadow-md">
+          <TypeWriter
+            speed={30}
+            content={content}
+          />
+        </div>
       </main>
     </div>
   )

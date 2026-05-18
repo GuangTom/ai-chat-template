@@ -1,4 +1,4 @@
-import { useEffect, useState, useTransition } from 'react'
+import { useEffect, useRef, useState, useTransition } from 'react'
 
 // 流式打字机组件
 type Props = {
@@ -6,14 +6,21 @@ type Props = {
   content: string
   /** 显示速度 */
   speed?: number
+  /** 内容输出完成 */
+  onComplete?: (content: string) => void
 }
 
-export default function TypeWriter({ content, speed = 10 }: Props) {
+export default function TypeWriter({ content, speed = 10, onComplete }: Props) {
   const [_isPending, startTransition] = useTransition()
+  const onCompleteRef = useRef(onComplete)
   const [typingStatus, setTypingStatus] = useState(() => ({
     content,
     showText: ''
   }))
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete
+  }, [onComplete])
 
   if (typingStatus.content !== content) {
     setTypingStatus({
@@ -35,6 +42,7 @@ export default function TypeWriter({ content, speed = 10 }: Props) {
       i++
       if (i >= content.length) {
         clearInterval(timer)
+        onCompleteRef.current?.(content)
       }
     }, speed)
 

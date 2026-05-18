@@ -3,8 +3,14 @@ import { useEffect, useRef, useState } from 'react'
 import { useChatStore } from '@/store/useChatStore'
 
 export default function MainLayout() {
-  const { sessionList, addSession, deleteSession, editSessionTitle } =
-    useChatStore()
+  const {
+    sessionList,
+    activeSessionId,
+    addSession,
+    deleteSession,
+    editSessionTitle,
+    setActiveSession
+  } = useChatStore()
   const [editingId, setEditingId] = useState<string | null>(null)
   const [draftTitle, setDraftTitle] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -83,9 +89,12 @@ export default function MainLayout() {
 
         <div className="session-list flex flex-col gap-2">
           {sessionList.map(item => (
+            // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
             <div
               key={item.id}
-              className="flex items-center gap-2 p-2 bg-gray-700 rounded-md"
+              className={`flex justify-between items-center p-2 rounded-md cursor-pointer transition
+      ${activeSessionId === item.id ? 'bg-gray-500' : 'bg-gray-700 hover:bg-gray-600'}`}
+              onClick={() => setActiveSession(item.id)}
             >
               {editingId === item.id ? (
                 <input
@@ -111,7 +120,10 @@ export default function MainLayout() {
 
               {editingId === item.id ? null : (
                 <button
-                  onClick={() => startEditTitle(item.id, item.title)}
+                  onClick={e => {
+                    e.stopPropagation()
+                    startEditTitle(item.id, item.title)
+                  }}
                   className="shrink-0 text-blue-400 hover:text-blue-300"
                 >
                   编辑
@@ -119,7 +131,10 @@ export default function MainLayout() {
               )}
 
               <button
-                onClick={() => deleteSession(item.id)}
+                onClick={e => {
+                  e.stopPropagation()
+                  deleteSession(item.id)
+                }}
                 className="shrink-0 text-red-400 hover:text-red-300"
               >
                 删除

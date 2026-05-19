@@ -124,7 +124,7 @@ export default function MainLayout() {
                     e.stopPropagation()
                     startEditTitle(item.id, item.title)
                   }}
-                  className="shrink-0 text-blue-400 hover:text-blue-300"
+                  className="shrink-0 mr-2 text-blue-400 hover:text-blue-300"
                 >
                   编辑
                 </button>
